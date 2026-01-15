@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <style>
+    html, body { height: 100%; margin: 0; }
+    table {border-collapse: collapse; width: 100%;}
+    th, td {text-align: left; padding: 8px;}
+    tr:nth-child(even) {background-color: #90d1d1;}
+  </style>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Scrap King Drag Recyclers</title>
+  </head>
+
+  <div>
+    <h2>Current Listings</h2>
+    <table>
+        <th>Ref.</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Contact</th>
+        <th>Email</th>
+        <th>Types</th>
+        <th>Image</th>
+        <td>
+            
+        </td>
+    </table>
+
+  </div>
+
+  <script>
+    async function fetchCSV(listings) {
+            try {
+                const response = await fetch(listings);
+                const data = await response.text();
+                document.getElementById('table').innerText = data;
+                var row = table.insertRow(data);
+            } catch (error) {
+                console.error('Error fetching CSV:', error);
+            }
+        }
+
+    fetchCSV('botwatcherwebsite/listings.csv');
+  </script>
+
+
+
+  <body>
+    <form action="itemlist.php" method="post" >
+        <!-- Index identifier-->
+        <input type="hidden" id="Listing reference number" name="Listing reference number" value=0>
+
+        <!-- Item description and contact details -->
+        <label for="Title">Listing Title:</label><br>
+        <input type="text" id="Title" name="Title"><br>
+        <br>
+        <label for="Description">Description (incl. size, whether it's free, barter or priced, whether you can deliver):</label><br>
+        <input type="text" id="Description" name="Description"><br>
+        <br>
+        <label for="Contact">Public contact (not your email!! this will appear on the website!):</label><br>
+        <input type="Contact" id="Contact" name="Contact"><br>
+        <br>
+        <label for="Email">Email (private, only used to confirm when your item is UNLISTED):</label><br>
+        <input type="text" id="Email" name="Email"><br>
+        <br>
+        <!-- Choose category labels -->
+        <input type="checkbox" id="Prop Category" name="Prop" value="Prop">
+        <label for="Prop"> Prop</label><br>
+        <input type="checkbox" id="Costume Category" name="Costume" value="Costume">
+        <label for="Costume"> Costume</label><br>
+        <input type="checkbox" id="Wanted Category" name="Wanted" value="Wanted">
+        <label for="Wanted"> Wanted</label><br>
+        <input type="checkbox" id="Service category" name="Service" value="Service">
+        <label for="Service"> Service</label><br>
+        <br>
+
+        <!-- Choose listing image-->
+        <label for="Image">Select an image for your listing:</label>
+        <input type="file" id="Image" name="Image">
+
+        <!-- Unlisting identifier-->
+        <input type="hidden" id="Unlisted" name="Unlisted" value=0>
+
+        <!-- Submit button -->
+        <input type="submit" value="Submit">
+  
+    </form>
+
+  </body>
+</html>
